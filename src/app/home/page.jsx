@@ -19,29 +19,33 @@ export default async function Home() {
     console.log(vidnesbyrd)
 
     return (
-        <div className=" mx-auto  w-[411px] flex items-center justify-center">
-            <main className="flex-1 pb-24  bg-[#003147]">
+        <div className=" mx-auto  w-[410px] ">
+            <main className=" bg-white">
 
-                <section className=" h-screen text-[36px] font-bold  relative text-white">
+                <section className=" text-[36px] font-bold  relative text-black">
                     <Image
-                        className="object-cover"
                         src="/welcome.jpg"
                         alt="welcome.jpg"
-                        fill
+                        width={410}
+                        height={324}
                         priority
                     />
-                    <div className=" absolute inset-0 flex flex-col items-center justify-center">
+                    <div className=" absolute inset-0 flex flex-col ">
 
-
+                        <h2 className="m-[20px] text-[36px] font-semibold text-[#F1C40E]">Welcome to <br></br> Belive Fitness</h2>
+                        <div className="m-[20px] text-[14px] font-semibold  flex gap-5">
+                            <Link  className="rounded-[24px] p-[12px] bg-[#F1C40E]"  href="/classes">CLASSES</Link>
+                            <Link  className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/login">LOG IN</Link>
+</div>
                     </div>
                 </section>
 
-                <h1 className="m-[27] text-[36px] font-semibold text-white">
+                <h1 className="m-[20px] text-[56px] font-semibold text-[#F1C40E]">
                     News
                 </h1>
 
                 {News.map(async (n) => {
-                    const pic = (await GetAsset(n.assetId)).url;
+                    const pic = n.asset.url;
                     console.log(pic)
                     return <HoldtypeCard key={n.id} headline={n.title} pic={pic} bodytext={n.text} />
                 })}
@@ -53,7 +57,7 @@ export default async function Home() {
 
                 <KontaktForm />
 
-                <section className="  mb-[24px] text-center  text-white" >
+                <section className="  mb-[24px] text-center  text-black" >
 
 
                     <h2 className="mt-[24px]  font-semibold text-[24px] ">Believe Fitness</h2>

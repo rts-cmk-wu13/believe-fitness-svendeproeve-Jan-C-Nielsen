@@ -35,7 +35,7 @@ export default function KontaktForm() {
                     </div>
                 </div>
                 {state.errors?.form && <p>{state.errors.form}</p>}
-                <button type="submit" disabled={isPending} className="mx-auto block  rounded-[10px] pt-[13px] pb-[13px] pr-[90px] pl-[90px] bg-white">{isPending ? "SENDING MESSAGE ..." : "SEND MESSAGE"}</button>
+                <button type="submit" disabled={isPending} className="mx-auto block  rounded-[24px] pt-[13px] pb-[13px] pr-[90px] pl-[90px] bg-[#F1C40E]">{isPending ? "SENDING MESSAGE ..." : "SEND MESSAGE"}</button>
             </form>
         </main>
     )

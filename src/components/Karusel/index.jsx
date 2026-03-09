@@ -11,8 +11,8 @@ export default function Karusel({ vidnesbyrd }) {
     const [index, setIndex] = useState(0);
 
     return (
-        <section className="mb-[82px] text-white">
-            <h3 className="m-[27] text-[28px] mb-[0px] font-semibold text-white text-center" >A word from<br></br> other Believers</h3>
+        <section className="mb-[82px] text-black">
+            <h3 className="m-[27] text-[28px] mb-[0px] font-semibold text-black text-center" >A word from<br></br> other Believers</h3>
             <DetSigerVoresKunderOmOsCard bodytext={vidnesbyrd[index].text}
                 name={vidnesbyrd[index].name} occupation={vidnesbyrd[index].occupation} />
 

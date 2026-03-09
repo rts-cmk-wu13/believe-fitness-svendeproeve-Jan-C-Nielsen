@@ -55,6 +55,6 @@ export async function loginUser(prevState, formData) {
 
     const data = await response.json();
 
-    return redirect("/")
+    return redirect("/home")
 
 }

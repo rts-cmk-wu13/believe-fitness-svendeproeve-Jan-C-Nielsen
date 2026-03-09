@@ -6,10 +6,60 @@ import { notFound, redirect } from "next/navigation";
 import { success } from "zod";
 
 
+export async function GetAverageRating(id) {
+    console.log("GetAverageRating");
+
+    try {
+        const url = "http://localhost:4000/api/v1/classes/" + id + "/ratings";
+        const response = await fetch(url);
+
+        //Response.ok is false for 404.
+        if (response.status === 404) {
+            return notFound();
+        }
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+
+        //Most servers return application/json; charset=utf-8
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+
+            const res = await response.json();
+            const ratetings = res.map((r) => (r.rating))
+            if (ratetings.length > 0) {
+                console.log("ratetings:", ratetings)
+                let avgrateting = 0;
+                for (let i = 0; i < ratetings.length; i++)
+                    avgrateting += ratetings[i]
+                avgrateting /= ratetings.length;
+                return avgrateting;
+            }
+            else
+                return 0;
+
+        }
+
+        throw new Error("Response is not JSON");
+
+    } catch (error) {
+        console.error(" error:", error);
+
+        return {
+            success: false,
+            message: "Fejl."
+        };
+    }
+}
+
+
+
 export async function GetAsset(id) {
     console.log("GetAsset");
 
-     try {
+    try {
         const url = "http://localhost:4000/api/v1/assets/" + id
         const response = await fetch(url);
 
@@ -254,15 +304,15 @@ export async function addUserToActivity(activity_id, met = "POST") {
 }
 
 
-export async function getAllActivities(searchStr = null) {
-    console.log("getAllActivities");
+export async function getAllClasses(searchStr = null) {
+    console.log("getAllClasses");
 
     try {
         const user = await getUser();// det burde testes om user er logget ind
         const age = user ? user.age : 0;
         const role = user ? user.role : "default";
         console.log(role)
-        const response = await fetch("http://localhost:4000/api/v1/activities");
+        const response = await fetch("http://localhost:4000/api/v1/classes");
 
         //Response.ok is false for 404.
         if (response.status === 404) {
@@ -322,11 +372,11 @@ export async function isUserInstructor() {
 }
 
 
-export async function getActivitie(id) {
-    console.log("getActivitie:" + id);
+export async function getClass(id) {
+    console.log("getClass:" + id);
 
     try {
-        const url = "http://localhost:4000/api/v1/activities/" + id
+        const url = "http://localhost:4000/api/v1/classes/" + id
         console.log("url:" + url);
         const response = await fetch(url, { cache: "no-store" });
 
@@ -349,11 +399,11 @@ export async function getActivitie(id) {
         throw new Error("Response is not JSON");
 
     } catch (error) {
-        console.error("getActivitie error:", error);
+        console.error("getClass error:", error);
 
         return {
             success: false,
-            message: "Fejl. Kunne ikke hente getActivitie"
+            message: "Fejl. Kunne ikke hente getClass"
         };
     }
 }
