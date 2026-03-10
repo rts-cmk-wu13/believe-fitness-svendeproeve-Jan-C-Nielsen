@@ -64,5 +64,5 @@ export async function loginUser(prevState, formData) {
     cookieStore.set("accessToken", data.token);
     cookieStore.set("userid", data.userId);
 
-    return redirect("/")
+    return redirect("/home")
 }
