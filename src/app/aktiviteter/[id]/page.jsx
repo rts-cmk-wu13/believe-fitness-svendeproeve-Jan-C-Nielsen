@@ -1,5 +1,5 @@
 
-"use client"
+
 
 import { getClass, isUserInstructor, isUserRegistered } from "@/lib/dal";
 import Image from "next/image";

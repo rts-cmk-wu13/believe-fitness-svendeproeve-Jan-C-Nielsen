@@ -4,6 +4,15 @@ import { GetAverageRating, getAllClasses } from "@/lib/dal";
 import Image from "next/image";
 import Link from "next/link";
 
+function renderStars(rating) {
+    const stars = Math.floor(rating);
+
+    return (
+        <>
+            {stars > 0 ? "★".repeat(stars) : "☆"}
+        </>
+    );
+}
 
 export default async function aktiviteter({ searchParams }) {
 
@@ -12,35 +21,58 @@ export default async function aktiviteter({ searchParams }) {
     const aktiviteter = await getAllClasses(searchstr);
     console.log(aktiviteter)
 
-    return (
-        <main className="flex-1 pb-24 bg-[#003147] w-[411px] mx-auto flex flex-col items-center justify-center text-white">
+    const randomAktivitet = aktiviteter[Math.floor(Math.random() * aktiviteter.length)];
+    const randomavgrating = await GetAverageRating(randomAktivitet.id);
 
-            <h2 className="ml-[27] text-[36px] self-start w-full text-left">Classes for You</h2>
-            <ul>
+    return (
+        <main className="flex-1 pb-24 bg-white w-[411px] mx-auto flex flex-col items-center justify-center text-black">
+
+            <h1 className="ml-[27] mb-[30px] text-[24px] self-start w-full text-left">Popular classes</h1>
+
+            {randomAktivitet && (
+                <div className="relative w-[370px] h-[404px] mb-[30px]">
+                    <Image
+                        src={randomAktivitet.asset.url}
+                        alt={randomAktivitet.className}
+                        fill
+                        className="object-cover rounded-[16px]"
+                        unoptimized
+                    />
+
+                    <div className="absolute bottom-0 left-0 w-[224px] text-black bg-[#F1C40E] p-4 text-[16px] rounded-[0px_16px_0px_16px]">
+                        <p>{randomAktivitet.className}</p>
+                        <p>{renderStars(randomavgrating)}</p>
+                    </div>
+                </div>
+            )}
+
+
+            <h2 className="ml-[27] text-[20px] font-bold self-start w-full text-left">Classes for You</h2>
+            <ul className="flex gap-5 w-full overflow-x-auto  px-4 ">
                 {aktiviteter.map(async (aktivitet) => {
                     const imageurl = aktivitet.asset.url;
                     const url = "/aktiviteter/" + aktivitet.id;
-                    const avgrating = await GetAverageRating(aktivitet.id)
-                    console.log(avgrating)
+                    const avgrating = await GetAverageRating(aktivitet.id);
+
                     return (
-                        <div className="flex  items-center justify-center">
-                            <li key={aktivitet.id}>
-                                <Link href={url}>
-                                    <div className="relative mb-[20px]">
-                                        <Image className=" rounded-[39px_39px_0px_39px]" src={imageurl}
-                                            alt={aktivitet.asset.url}
-                                            width={80}
-                                            height={17}
-                                            unoptimized
-                                        ></Image>
-                                        <div className="text-[12px] absolute bottom-0 left-0 w-full text-white bg-black/60 p-3 rounded-[0px_39px_0px_39px]">
-                                            <p className="">  {aktivitet.className}</p>
-                                            <p>{avgrating}</p>
-                                        </div>
+                        <li key={aktivitet.id} className="flex-shrink-0 ">
+                            <Link href={url}>
+                                <div className="relative mb-[20px] w-[128px]">
+                                    <Image
+                                        className="rounded-[16px] w-[128px] h-[145px] object-cover"
+                                        src={imageurl}
+                                        alt={aktivitet.className}
+                                        width={128}
+                                        height={145}
+                                        unoptimized
+                                    />
+                                    <div className="text-[12px] absolute bottom-0 left-0 w-full text-black bg-[#F1C40E] p-3 rounded-[0px_16px_0px_16px]">
+                                        <p>{aktivitet.className}</p>
+                                        <p>{renderStars(avgrating)}</p>
                                     </div>
-                                </Link>
-                            </li>
-                        </div>
+                                </div>
+                            </Link>
+                        </li>
                     );
                 })}
             </ul>
