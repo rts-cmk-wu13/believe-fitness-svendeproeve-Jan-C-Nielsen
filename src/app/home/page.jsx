@@ -23,7 +23,7 @@ export default async function Home() {
             <main className=" bg-white">
 
                 <section className=" text-[36px] font-bold  relative text-black">
-                    <Image
+                    <Image className="w-[410px] h-[324px]"
                         src="/welcome.jpg"
                         alt="welcome.jpg"
                         width={410}
@@ -31,12 +31,24 @@ export default async function Home() {
                         priority
                     />
                     <div className=" absolute inset-0 flex flex-col ">
-
+                        <Link
+                            href="/navigation"
+                            className="flex justify-end p-[21px]"
+                        >
+                              <Image
+                        src="/Menu.png"
+                        alt="Menu.png"
+                        width={21}
+                        height={15}
+                        priority
+                    />
+                            
+                        </Link>
                         <h2 className="m-[20px] text-[36px] font-semibold text-[#F1C40E]">Welcome to <br></br> Belive Fitness</h2>
                         <div className="m-[20px] text-[14px] font-semibold  flex gap-5">
-                            <Link  className="rounded-[24px] p-[12px] bg-[#F1C40E]"  href="/classes">CLASSES</Link>
-                            <Link  className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/login">LOG IN</Link>
-</div>
+                            <Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/aktiviteter">CLASSES</Link>
+                            <Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/login">LOG IN</Link>
+                        </div>
                     </div>
                 </section>
 
