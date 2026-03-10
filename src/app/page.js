@@ -1,31 +1,68 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Splash() {
+  const images = ["/welcomecenter.png", "/welcomecenter2.png"];
+  const bgImage = images[Math.floor(Math.random() * images.length)];
+
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 700);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="mx-auto">
+      <main className="relative mx-auto flex w-[411px] h-[812px] flex-col">
+
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src={bgImage}
+          alt="welcome background"
+          fill
+          className="object-cover"
           priority
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-           Landing page
+
+        <div className="relative z-10 flex flex-col justify-end h-full px-[31px] pb-[60px]">
+          <h1 className="text-[56px] font-bold text-[#F1C40E]">Believe</h1>
+          <h1 className="text-[56px] font-bold mb-[15px] text-[#F1C40E]">
+            Fitness
           </h1>
-          
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <div className="flex items-center mb-12 gap-2">
+            <Image
+              className="w-[31px] h-[1px]"
+              src="/WhiteLine.png"
+              alt="Line"
+              width={31}
+              height={1}
+              unoptimized
+            />
+            <p className="text-[20px] font-bold text-white">
+              Train like a pro
+            </p>
+          </div>
+
+          <Link
+            href="/home"
+            className={`self-center w-[178px] h-[44px]  text-[14px] font-semibold text-black bg-[#F1C40E] rounded-full flex items-center 
+              justify-center transition-all duration-500 ${
+              showButton
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
           >
-            Documentation
-          </a>
+            Start training
+          </Link>
         </div>
+
       </main>
     </div>
   );
