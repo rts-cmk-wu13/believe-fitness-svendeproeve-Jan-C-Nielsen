@@ -56,6 +56,41 @@ export async function GetAverageRating(id) {
 
 
 
+export async function GetTrainer(id) {
+    console.log("GetTrainer");
+    try {
+        const url = "http://localhost:4000/api/v1/trainers/" + id
+        const response = await fetch(url);
+
+        //Response.ok is false for 404.
+        if (response.status === 404) {
+            return notFound();
+        }
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+
+        //Most servers return application/json; charset=utf-8
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        }
+
+        throw new Error("Response is not JSON");
+
+    } catch (error) {
+        console.error("tellAllToThePriest error:", error);
+
+        return {
+            success: false,
+            message: "Fejl. Kunne ikke hente vidnesbyrd"
+        };
+    }
+}
+
+
 export async function GetAsset(id) {
     console.log("GetAsset");
 
