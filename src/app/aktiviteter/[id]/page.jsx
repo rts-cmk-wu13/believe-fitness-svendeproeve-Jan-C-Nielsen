@@ -25,8 +25,8 @@ export default async function aktiviteter({ params }) {
     const imageurl = aktivitet.asset.url;
     const trainer = await GetTrainer(id)
   const avgrating = await GetAverageRating(aktivitet.id);
-    // const UserRegistered = await isUserRegistered(aktivitet)
-    // console.log("UserRegistered:" + UserRegistered)
+     const UserRegistered = await isUserRegistered(aktivitet)
+     console.log("UserRegistered:" + UserRegistered)
 
 
     return (
@@ -74,7 +74,7 @@ export default async function aktiviteter({ params }) {
                 </div>
                 
                 <button className="px-4 py-2 w-full mt-4 bg-[#F1C40E] text-black rounded-full ">
-                    SIGN UP
+                  { UserRegistered ? "Leave" : "SIGN UP"}
                 </button>
             </div>
 

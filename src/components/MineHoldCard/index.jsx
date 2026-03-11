@@ -10,7 +10,11 @@ export function TilMeldteHoldCard({ name, weekday, time, hold_id }) {
             <h2></h2>
             <p className="text-[26px] mt-[10px]">{name}</p>
             <p className="text-[18px] mt-[10px]  mb-[24px]"><span className="mr-[10px]">{weekday}</span><span>- {time}</span></p>
-            <Link href={holdlink} className="rounded-full text-[14px] p-[9px_28px] font-semibold text-black  bg-[#F1C40E]" >SHOW CLASS</Link>
+            <section className="bg-white flex items-center justify-between w-full gap-4">
+
+                <Link href={holdlink} className="rounded-full text-[14px] p-[9px_28px] font-semibold text-black  bg-[#F1C40E]" >SHOW CLASS</Link>
+                <Link href={holdlink} className=" rounded-full text-[14px] p-[9px_28px] font-semibold text-black  bg-[#F1C40E]" >Leave</Link>
+            </section>
         </section>
     )
 }
