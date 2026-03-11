@@ -1,10 +1,10 @@
 import { getActivitiesForInstructor, getAllActivities, getUser } from "@/lib/dal";
-//import Footer from "../../components/footer";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import { MineHoldCard, TilMeldteHoldCard } from "@/app/components/MineHoldCard";
-import Footer from "../components/footer";
+import { MineHoldCard, TilMeldteHoldCard } from "@/components/MineHoldCard";
+
 import { redirect } from "next/navigation";
 
 export default async function profil() {
@@ -21,23 +21,44 @@ export default async function profil() {
     }
 
     return (
-        <main className="flex-1  bg-[#003147] w-[411px] m-[27] mx-auto ">
-            <h2 className=" text-[24px] text-white text-center p-[10px]">Min profil</h2>
-            <section className="bg-white flex flex-col  items-center justify-center">
-                <Image className="mt-[20px]"
-                    src="/Person.png"
+        <main className="flex-1 p-[20px] bg-white w-[411px] m-[27] mx-auto ">
+            <div className="flex items-center justify-between w-full">
+                <h2 className=" text-[24px] text-black text-left p-[10px]">My Profile</h2>
+
+                <Link
+                    href="/navigation"
+                    className=" "
+                >
+                    <Image
+                        src="/MenuGrey.png"
+                        alt="MenuGrey.png"
+                        width={21}
+                        height={15}
+                        priority
+                    />
+
+                </Link>
+            </div>
+            <section className="bg-white flex items-center gap-4">
+                <Image
+                    src="/SmallPerson.png"
                     alt="Person"
                     width={64}
                     height={64}
                     priority
                 />
-                <p className="mt-[10px]"><span className="mr-[10px]">{user.firstname}</span><span>{user.lastname}</span></p>
-                <p className="mb-[24px] mt-[10px]">{user.role}</p>
+
+                <div className="flex flex-col">
+                    <p>
+                        <span className="mr-2">{user.userFirstName}</span>
+                        <span>{user.userLastName}</span>
+                    </p>
+                    <p>{user.role}</p>
+                </div>
             </section>
 
-            <h2 className="mt-[27px] text-left ml-[27px] text-[27px] text-white font-semibold " >  {user.role === "instructor" ? "Mine hold" : "Tilmeldte hold"}</h2>
 
-            <section className="  rounded-[12px]  text-left p-[10px]">
+            <section className=" ">
                 {user.role === "instructor" ?
 
                     activities.map((activitie) => {
@@ -45,12 +66,12 @@ export default async function profil() {
                             maxParticipants={activitie.maxParticipants} noParticipants={activitie.users.length} />)
                     })
                     :
-                    user.activities.map((activitie) => {
-                        return (<TilMeldteHoldCard name={activitie.name} weekday={activitie.weekday} time={activitie.time} hold_id={activitie.id} />)
+                    user.classes.map((activitie) => {
+                        return (<TilMeldteHoldCard name={activitie.className} weekday={activitie.classDay} time={activitie.classTime} hold_id={activitie.id} />)
                     })
                 }
             </section>
-           
+
         </main>
     )
 }

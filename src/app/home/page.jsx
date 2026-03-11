@@ -35,14 +35,14 @@ export default async function Home() {
                             href="/navigation"
                             className="flex justify-end p-[21px]"
                         >
-                              <Image
-                        src="/Menu.png"
-                        alt="Menu.png"
-                        width={21}
-                        height={15}
-                        priority
-                    />
-                            
+                            <Image
+                                src="/Menu.png"
+                                alt="Menu.png"
+                                width={21}
+                                height={15}
+                                priority
+                            />
+
                         </Link>
                         <h2 className="m-[20px] text-[36px] font-semibold text-[#F1C40E]">Welcome to <br></br> Belive Fitness</h2>
                         <div className="m-[20px] text-[14px] font-semibold  flex gap-5">

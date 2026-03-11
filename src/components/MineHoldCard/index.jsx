@@ -6,11 +6,11 @@ export function TilMeldteHoldCard({ name, weekday, time, hold_id }) {
     const holdlink = "/aktiviteter/" + hold_id;
 
     return (
-        <section className="rounded-[10px] p-[16px]  bg-white/80 text-black m-[27]  ">
+        <section className="rounded-[24px] w-[370px] border p-[16px]  bg-white text-black mt-[27]  ">
             <h2></h2>
             <p className="text-[26px] mt-[10px]">{name}</p>
-            <p className="text-[18px] mt-[10px]  mb-[24px]"><span className="mr-[10px]">{weekday}</span><span>Kl.{time}</span></p>
-            <Link href={holdlink} className="rounded-[10px] text-[18px] p-[9px_28px] text-white  bg-black" >Vis hold</Link>
+            <p className="text-[18px] mt-[10px]  mb-[24px]"><span className="mr-[10px]">{weekday}</span><span>- {time}</span></p>
+            <Link href={holdlink} className="rounded-full text-[14px] p-[9px_28px] font-semibold text-black  bg-[#F1C40E]" >SHOW CLASS</Link>
         </section>
     )
 }

@@ -30,7 +30,7 @@ export default function Navigation() {
           Search
         </Link>
 
-        <Link href="/profile" className="hover:text-blue-600">
+        <Link href="/profil" className="hover:text-blue-600">
           My Profile
         </Link>
 
