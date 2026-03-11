@@ -5,48 +5,53 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 const loginSchema = z.object({
-    fornavn: z.string().min(2, "Fornavn min 2 tegn"),
-    efternavn: z.string().min(2, "Efternavn min 2 tegn"),
-    brugernavn: z.string().min(2, "Brugernavn min 2 tegn"),
-    alder: z.string().min(2, "Alder min 1 tegn"),
-    adgangskode: z.string().min(4, "Adgangskode min 4 tegn"),
-    gentagadgangskode: z.string().min(4, "Adgangskode min 4 tegn")
-})
+    fornavn: z.string().min(2, "Names min 2 chars"),
+    email: z.email("Invalid email"),
+    adgangskode: z.string().min(4, "Password min 4 chars"),
+    gentagadgangskode: z.string().min(4, "Password min 4 chars")
+}).refine((data) => data.adgangskode === data.gentagadgangskode, {
+    message: "Password does not match",
+    path: ["gentagadgangskode"], 
+});
 
 
 
 export async function loginUser(prevState, formData) {
 
     const fornavn = formData.get("fornavn");
-    const efternavn = formData.get("efternavn");
-    const brugernavn = formData.get("brugernavn");
-    const alder = formData.get("alder");
+    const email = formData.get("email");
     const adgangskode = formData.get("adgangskode");
     const gentagadgangskode = formData.get("gentagadgangskode");
 
-    console.log(fornavn, efternavn, brugernavn);
+    console.log(fornavn);
 
     if (
-        fornavn === prevState.values.fornavn && 
-        efternavn === prevState.values.efternavn && 
-        brugernavn === prevState.values.brugernavn &&
-        alder === prevState.values.alder && 
-        adgangskode === prevState.values.adgangskode && 
+        fornavn === prevState.values.fornavn &&
+        email === prevState.values.email &&
+        adgangskode === prevState.values.adgangskode &&
         gentagadgangskode === prevState.values.gentagadgangskode
-   )
+    )
         return prevState;
 
     //Valider her
-    const result = loginSchema.safeParse({fornavn, efternavn, brugernavn, alder, adgangskode, gentagadgangskode});//zod.dev version 3
+    const result = loginSchema.safeParse({ fornavn, email, adgangskode, gentagadgangskode });//zod.dev version 3
 
     if (!result.success) {
         console.log(z.flattenError(result.error).fieldErrors);
         return {
-            values: {fornavn, efternavn, brugernavn, alder, adgangskode, gentagadgangskode },
+            values: { fornavn, email, adgangskode, gentagadgangskode },
             errors: z.flattenError(result.error).fieldErrors
         }
 
     }
+
+    const username = email;
+    const [userFirstName, userLastName = ""] = fornavn.split(" ", 2);
+
+/* "username": "user42",
+  "password": "1234",
+  "userFirstName": "Holger",
+  "userLastName": "Danske" */
 
     const response = await fetch("http://localhost:4000/api/v1/users",
         {
@@ -54,14 +59,14 @@ export async function loginUser(prevState, formData) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "firstname":fornavn, "lastname":efternavn, "username":brugernavn, "age":alder, "password":adgangskode, "role":"default" })
+            body: JSON.stringify({  "username": email, "password": adgangskode, "userFirstName": userFirstName, "userLastName": userLastName })
         }
     );
 
     if (!response.ok) {
         return {
             values: {
-                fornavn, efternavn, brugernavn, alder, adgangskode
+                fornavn,  adgangskode
             },
             errors: { form: ["Fejl"] }
         }
@@ -69,6 +74,6 @@ export async function loginUser(prevState, formData) {
 
     const data = await response.json();
 
-    return redirect("/")
+    return redirect("/home")
 
 }
