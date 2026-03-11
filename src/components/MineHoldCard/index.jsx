@@ -24,12 +24,12 @@ export function MineHoldCard({ name, weekday, time, hold_id, maxParticipants, no
     const deltagerlink = "/deltagerliste";
 
     return (
-        <section className="rounded-[10px] p-[16px]  bg-white/80 text-black m-[27]  ">
+        <section className="rounded-[24px] w-[370px] border p-[16px]  bg-white text-black mt-[27]  ">
 
-            <p className="text-[26px] mt-[10px]">{name}</p>
-            <p className="text-[18px] mt-[10px]  mb-[24px]"><span className="mr-[10px]">{weekday}</span><span>Kl.{time}</span></p>
-            <p className="flex text-[18px] mt-[10px]  mb-[24px]"><span className="mr-[20px]">Max. deltagere: {maxParticipants}</span><span className="ml-auto">Tilmeldte: {noParticipants}</span></p>
-            <div className="flex"><Link href={deltagerlink} className=" bg-[#003147] rounded-[10px] text-[18px] p-[9px_28px] text-white" >Deltagerliste</Link>
+            <p className="text-[24px] font-bold mt-[10px]">{name}</p>
+            <p className="text-[16px] mt-[10px]  mb-[24px]"><span className="mr-[10px]">{weekday}</span><span>- {time}</span></p>
+            <p className="flex text-[16px] mt-[10px]  mb-[24px]"><span className="mr-[20px]">Max. participants: {maxParticipants}</span><span className="ml-auto">Joined: {noParticipants}</span></p>
+            <div className="flex"><Link href={deltagerlink} className=" rounded-full text-[14px] p-[9px_28px] font-semibold text-black  bg-[#F1C40E]" >Participants</Link>
                 <Image className="ml-[55px]"
                     src="/lucide_edit.png"
                     alt="lucide_edit"

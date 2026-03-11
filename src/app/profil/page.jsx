@@ -1,4 +1,4 @@
-import { getActivitiesForInstructor, getAllActivities, getUser } from "@/lib/dal";
+import { getAllClasses, getUser } from "@/lib/dal";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +15,8 @@ export default async function profil() {
         redirect("/");
 
     let activities = [];
-    if (user.role === "instructor") {
-        activities = await getActivitiesForInstructor();
+    if (user.role === "admin") {
+        activities = await getAllClasses();
         console.log(activities)
     }
 
@@ -59,11 +59,11 @@ export default async function profil() {
 
 
             <section className=" ">
-                {user.role === "instructor" ?
+                {user.role === "admin" ?
 
                     activities.map((activitie) => {
-                        return (<MineHoldCard name={activitie.name} weekday={activitie.weekday} time={activitie.time} hold_id={activitie.id}
-                            maxParticipants={activitie.maxParticipants} noParticipants={activitie.users.length} />)
+                        return (<MineHoldCard name={activitie.className} weekday={activitie.classDay} time={activitie.classTime} hold_id={activitie.id}
+                            maxParticipants={activitie.maxParticipants} noParticipants={0} />)
                     })
                     :
                     user.classes.map((activitie) => {

@@ -1,15 +1,14 @@
 import { getActivitiesForInstructor, getUser } from "@/lib/dal";
-//import Footer from "../../components/footer";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import MineHoldCard from "@/app/components/MineHoldCard";
-import Footer from "../components/footer";
+
 
 export default async function deltagerliste() {
     const user = await getUser();
     console.log(user)
-    const ActivitiesForInstructor = await getActivitiesForInstructor()
+    const ActivitiesForInstructor =  null; //await getActivitiesForInstructor()
     console.log(ActivitiesForInstructor)
     return (
         <main className="flex-1 pb-24  bg-[#003147] w-[411px] m-[27] mx-auto ">
@@ -56,7 +55,7 @@ export default async function deltagerliste() {
                 })}
 
             </section>
-            <Footer />
+          
         </main>
     )
 }

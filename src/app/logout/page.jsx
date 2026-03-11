@@ -1,6 +1,6 @@
 //"use client"
 
-import LogoutForm from "../components/LogoutForm/LogoutForm";
+import LogoutForm from "@/components/LogoutForm/LogoutForm";
 
 export default function logout() {
 

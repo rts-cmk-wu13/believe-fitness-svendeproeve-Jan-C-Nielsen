@@ -222,6 +222,7 @@ export async function getUser(id = null) {
                 headers: {
                     Authorization: `Bearer ${accessTokenCookie.value}`
                 }
+                , cache: "no-store"
             }
         );
 
@@ -236,7 +237,9 @@ export async function getUser(id = null) {
         const contentType = response.headers.get("content-type");
 
         if (contentType?.includes("application/json")) {
-            return await response.json();
+            const jsonres =  await response.json();
+            console.log("jsonres------",jsonres)
+            return jsonres;
         }
 
         throw new Error("Response is not JSON");
@@ -244,35 +247,6 @@ export async function getUser(id = null) {
     } catch (error) {
         console.log("getUser error:", error);
         return null
-    }
-}
-
-
-
-export async function getActivitiesForInstructor() {
-    try {
-        const activities = await getAllActivities()
-        console.log("AllActivities :", activities);
-        const cookieStore = await cookies();
-        const accessTokenCookie = cookieStore.get("accessToken");
-        const user_id = cookieStore.get("userid")?.value;
-
-        if (!accessTokenCookie || !user_id) {
-            console.error("Access token/userid cookie not found");
-            redirect("/login");
-        }
-
-        const activitiesForInstructor = activities.filter((a) => (a.instructorId == user_id));
-
-        return activitiesForInstructor;
-
-    } catch (error) {
-        console.log("getAllActivities error:", error);
-
-        return {
-            success: false,
-            message: "Fejl. Kunne ikke finde activities for instructor"
-        };
     }
 }
 
@@ -299,7 +273,7 @@ export async function addUserToActivity(activity_id, met = "POST") {
 
         console.log("Access token:", accessTokenCookie.value);
 
-        const url = `http://localhost:4000/api/v1/users/${user_id.value}/activities/${activity_id}`;
+        const url = `http://localhost:4000/api/v1/users/${user_id.value}/classes/${activity_id}`;
         console.log("url:", url);
         const response = await fetch(
             url,
