@@ -7,12 +7,13 @@ export default async function LogoutAction(params) {
     const cookieStore = await cookies();
 
     cookieStore.delete("accessToken");
-    cookieStore.delete("username");
+    cookieStore.delete("userid");
 
-    return redirect("/")
+    return redirect("/home")
 
 }
-//bruges ikke
+
+
 export async function isUserLoggedIn() {
     const cookieStore = await cookies();
     return cookieStore.has("accessToken");

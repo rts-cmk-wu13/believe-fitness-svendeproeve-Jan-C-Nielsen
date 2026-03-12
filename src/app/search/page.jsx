@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import { saveMessage } from "./actions";
 import { getAllClasses, GetAverageRating } from "@/lib/dal";
 import Link from "next/link";
