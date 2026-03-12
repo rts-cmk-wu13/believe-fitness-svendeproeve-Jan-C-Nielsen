@@ -21,7 +21,7 @@ export function TilMeldteHoldCard({ name, weekday, time, hold_id }) {
 
 export function MineHoldCard({ name, weekday, time, hold_id, maxParticipants, noParticipants }) {
 
-    const deltagerlink = "/deltagerliste";
+    const deltagerlink = "/deltagerliste/" + hold_id;
 
     return (
         <section className="rounded-[24px] w-[370px] border p-[16px]  bg-white text-black mt-[27]  ">

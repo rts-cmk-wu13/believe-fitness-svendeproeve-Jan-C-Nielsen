@@ -9,7 +9,6 @@ import Karusel from "@/components/Karusel";
 import Nyhedsbrev from "@/components/Nyhedsbrev";
 import { isUserLoggedIn } from "@/components/LogoutForm/action";
 
-//import { isUserLoggedIn } from "./components/LogoutForm/action";
 
 export default async function Home() {
 

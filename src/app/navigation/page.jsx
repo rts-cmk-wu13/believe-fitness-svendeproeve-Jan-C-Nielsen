@@ -29,7 +29,7 @@ export default function Navigation() {
         </button>
       </div>
 
-      <nav className="flex flex-col items-center justify-center flex-1 gap-8 text-[24px]">
+      <nav className="flex flex-col items-center justify-center flex-1 gap-8 bg-white text-[24px]">
         <Link href="/home" className="hover:text-blue-600">
           Home
         </Link>
@@ -38,7 +38,7 @@ export default function Navigation() {
           Popular classes
         </Link>
 
-        <Link href="/search" className="hover:text-blue-600">
+        <Link href={ `/search?searchstr=""`} className="hover:text-blue-600">
           Search
         </Link>
 
@@ -48,11 +48,11 @@ export default function Navigation() {
 
         {loggedIn ? (
           <Link className="hover:text-blue-600" href="/logout">
-            LOG OUT
+            Log out
           </Link>
         ) : (
           <Link className="hover:text-blue-600" href="/login">
-            LOG IN
+            Log in
           </Link>
         )}
       </nav>

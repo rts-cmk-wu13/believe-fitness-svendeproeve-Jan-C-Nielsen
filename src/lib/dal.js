@@ -238,7 +238,7 @@ export async function getUser(id = null) {
 
         if (contentType?.includes("application/json")) {
             const jsonres =  await response.json();
-            console.log("jsonres------",jsonres)
+            console.log(jsonres)
             return jsonres;
         }
 
