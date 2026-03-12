@@ -8,5 +8,5 @@ export async function saveMessage(formData) {
 
 const encodedMsg = encodeURIComponent(msg);
 
-  redirect(`/aktiviteter?searchstr=${encodedMsg}`);
+  redirect(`/search?searchstr=${encodedMsg}`);
 }

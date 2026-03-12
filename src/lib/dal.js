@@ -338,15 +338,13 @@ export async function getAllClasses(searchStr = null) {
         if (contentType && contentType.includes("application/json")) {
             let data = await response.json();
 
-            //Filtrer aktiviteter væk baseret på brugerens alder
-            if (role !== "instructor" && age > 0) {
-                data = data.filter((item) => (item.maxAge >= age && item.minAge <= age))
-            }
-
-            //søg aktivitets-titel, ugedag og intruktørnavn.
             if (searchStr) {
                 searchStr = searchStr.trim().toLowerCase();
-                data = data.filter((item) => (item.name.toLowerCase().includes(searchStr) || item.weekday.toLowerCase().includes(searchStr)))
+                data = data.filter((item) => (
+                   item.className.toLowerCase().includes(searchStr) 
+                || item.classDay.toLowerCase().includes(searchStr)
+                || item.classDescription.toLowerCase().includes(searchStr)
+                || item.trainer.trainerName.toLowerCase().includes(searchStr)))
             }
             return data;
         }
