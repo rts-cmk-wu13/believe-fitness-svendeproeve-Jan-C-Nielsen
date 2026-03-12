@@ -1,8 +1,5 @@
-//"use client"
-
-
 import { cookies } from "next/headers"
-import LogoutAction, { isUserLoggedIn } from "./action"
+import LogoutAction from "./action"
 import Link from "next/link";
 
 export default async function Logout() {
@@ -12,16 +9,22 @@ export default async function Logout() {
     console.log("isLoggedIn=" + isLoggedIn)
 
     return (
-        <main>
-            <form action={LogoutAction}>
-                {
-                    <button type="submit">
-                        Log out
-                    </button> 
-                }
+        <main className="mx-auto flex items-center justify-center flex-col min-h-screen w-full bg-white">
+            <form 
+                className="border bg-[#F1C40E] w-full rounded-full pt-[13px] pb-[13px] pr-[90px] pl-[90px] mb-[10px] text-black text-center"
+                action={LogoutAction}
+            >
+                <button type="submit" className="w-full text-center">
+                    Log out
+                </button>
             </form>
 
-            <Link href="/">Cancel</Link>
+            <Link
+                className="border bg-[#F1C40E] w-full rounded-full pt-[13px] pb-[13px] pr-[90px] pl-[90px] mb-[10px] text-black text-center block"
+                href="/home"
+            >
+                Cancel
+            </Link>
         </main>
     )
 }

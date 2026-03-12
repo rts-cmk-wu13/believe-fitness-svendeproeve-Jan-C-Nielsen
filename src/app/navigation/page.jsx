@@ -1,23 +1,35 @@
 "use client";
 
+import { isUserLoggedIn } from "@/components/LogoutForm/action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navigation() {
   const router = useRouter();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    async function checkLogin() {
+      const result = await isUserLoggedIn();
+      setLoggedIn(result);
+    }
+    checkLogin();
+  }, []);
 
   return (
-    <main className="fixed mx-auto w-[411px] inset-0  flex flex-col bg-white">
+    <main className="fixed mx-auto w-[411px] inset-0 flex flex-col bg-white">
       
-    
       <div className="flex justify-end p-6">
-        <button onClick={() => router.back()} className="text-[24px] font-bold " >
+        <button
+          onClick={() => router.back()}
+          className="text-[24px] font-bold"
+        >
           X
         </button>
       </div>
 
-    
-      <nav className="flex flex-col items-center justify-center flex-1 gap-8 text-[24px] ">
+      <nav className="flex flex-col items-center justify-center flex-1 gap-8 text-[24px]">
         <Link href="/home" className="hover:text-blue-600">
           Home
         </Link>
@@ -34,9 +46,15 @@ export default function Navigation() {
           My Profile
         </Link>
 
-        <Link href="/logout" className="hover:text-red-800">
-          Log Out
-        </Link>
+        {loggedIn ? (
+          <Link className="hover:text-blue-600" href="/logout">
+            LOG OUT
+          </Link>
+        ) : (
+          <Link className="hover:text-blue-600" href="/login">
+            LOG IN
+          </Link>
+        )}
       </nav>
     </main>
   );

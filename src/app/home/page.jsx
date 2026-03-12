@@ -7,6 +7,7 @@ import { GetAsset, GetNews, getTestimonials } from "@/lib/dal";
 import HoldtypeCard from "@/components/HoldtypeCard";
 import Karusel from "@/components/Karusel";
 import Nyhedsbrev from "@/components/Nyhedsbrev";
+import { isUserLoggedIn } from "@/components/LogoutForm/action";
 
 //import { isUserLoggedIn } from "./components/LogoutForm/action";
 
@@ -47,7 +48,11 @@ export default async function Home() {
                         <h2 className="m-[20px] text-[36px] font-semibold text-[#F1C40E]">Welcome to <br></br> Belive Fitness</h2>
                         <div className="m-[20px] text-[14px] font-semibold  flex gap-5">
                             <Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/aktiviteter">CLASSES</Link>
-                            <Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/login">LOG IN</Link>
+                            {await isUserLoggedIn() ?
+                                (<Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/logout">LOG OUT</Link>)
+                                :
+                                (<Link className="rounded-[24px] p-[12px] bg-[#F1C40E]" href="/login">LOG IN</Link>)
+                            }
                         </div>
                     </div>
                 </section>
@@ -70,8 +75,6 @@ export default async function Home() {
                 <KontaktForm />
 
                 <section className="  mb-[24px] text-center  text-black" >
-
-
                     <h2 className="mt-[24px]  font-semibold text-[24px] ">Believe Fitness</h2>
                     <p>Train like a pro</p>
                     <p className=" text-[18px] ">Rabalderstræde 48  4000 Roskilde</p>
