@@ -1,9 +1,6 @@
-import { getActivitiesForInstructor, getClass, getUser } from "@/lib/dal";
-
+import { getClass, getUser } from "@/lib/dal";
 import Image from "next/image";
 import Link from "next/link";
-
-
 
 export default async function deltagerliste({ params }) {
     const id = (await params).id;
@@ -14,8 +11,8 @@ export default async function deltagerliste({ params }) {
 
     console.log(a)
     return (
-        <main className="flex-1 pb-24  bg-white w-[411px] m-[27] mx-auto ">
-            <div className="flex items-center justify-between w-full">
+        <main className="p-4 flex-1 pb-24  bg-white w-[411px] m-[27] mx-auto ">
+            <div className=" flex items-center justify-between w-full">
                 <h2 className=" text-[24px] text-black text-left p-[10px]">My Profile</h2>
 
                 <Link

@@ -47,6 +47,7 @@ export async function loginUser(prevState, formData) {
 
     const username = email;
     const [userFirstName, userLastName = ""] = fornavn.split(" ", 2);
+console.log("**************",userFirstName, "-----", userLastName)
 
 /* "username": "user42",
   "password": "1234",

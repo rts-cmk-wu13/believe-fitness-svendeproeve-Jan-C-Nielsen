@@ -9,7 +9,7 @@ const initialState = {
     values: {
         fornavn: "",
         email: "",
-       
+
         adgangskode: "",
         gentagadgangskode: ""
     },
@@ -23,24 +23,24 @@ export default function KontaktForm() {
     return (
         <main className=" mx-auto w-full bg-white">
 
-          <h1 className="ml-[31px] text-[56px] font-bold mt-[40px] text-[#F1C40E] " >Believe</h1>
-                    <h1 className="ml-[31px] text-[56px] font-bold mb-[15px] text-[#F1C40E]" >Fitness</h1>
-                    <div className="flex items-center  mb-12 gap-2">
-                        <Image
-                            className="w-[31px] h-[1px]"
-                            src="/Line 51.png"
-                            alt="Line 51.png"
-                            width={31}
-                            height={1}
-                            unoptimized
-                        />
-                        <p className="text-[20px] font-bold text-black">
-                            Train like a pro
-                        </p>
-                    </div>
-        
-                    <h1 className="text-[20px] mb-4 font-bold text-black" >Sign up as a new user</h1>
-            <form className="w-full text-black block mx-auto  mb-[27] " action={formAction} noValidate>
+            <h1 className="ml-[31px] text-[56px] font-bold mt-[40px] text-[#F1C40E] " >Believe</h1>
+            <h1 className="ml-[31px] text-[56px] font-bold mb-[15px] text-[#F1C40E]" >Fitness</h1>
+            <div className="flex items-center  mb-12 gap-2">
+                <Image
+                    className="w-[31px] h-[1px]"
+                    src="/Line 51.png"
+                    alt="Line 51.png"
+                    width={31}
+                    height={1}
+                    unoptimized
+                />
+                <p className="text-[20px] font-bold text-black">
+                    Train like a pro
+                </p>
+            </div>
+
+            <h1 className="text-[20px] p-4 font-bold text-black" >Sign up as a new user</h1>
+            <form className="w-full text-black block mx-auto p-4 mb-[27] " action={formAction} noValidate>
                 <div >
                     <div>
                         <input className="border rounded-full bg-white  mb-8 p-[13]  w-full" placeholder="Enter your name..." type="text" name="fornavn" defaultValue={state.values.fornavn}></input>
@@ -62,7 +62,7 @@ export default function KontaktForm() {
                 </div>
                 {state.errors?.form && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.form}</p>}
                 <button type="submit" disabled={isPending} className="border rounded-full bg-[#F1C40E] w-full block mx-auto rounded-[10px] pt-[13px] pb-[13px] pr-[90px] pl-[90px] mb-[10px]  text-black ">{isPending ? "SIGNING UP..." : "SIGN UP"}</button>
-             </form>
+            </form>
         </main>
     )
 }
