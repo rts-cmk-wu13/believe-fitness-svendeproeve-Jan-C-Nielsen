@@ -1,4 +1,4 @@
-import { getAllClasses, getUser } from "@/lib/dal";
+import { getAllClasses, getClass, getUser } from "@/lib/dal";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,9 +15,20 @@ export default async function profil() {
         redirect("/");
 
     let activities = [];
+
     if (user.role === "admin") {
         activities = await getAllClasses();
-        console.log(activities)
+
+        console.log(activities);
+
+        activities = await Promise.all(
+            activities.map(async (a) => {
+                const activity = await getClass(a.id);//Fordi users ikke er med når man henter alle klasser!
+                const noParticipants = activity.users.length;
+
+                return { ...a, noParticipants };
+            })
+        );
     }
 
     return (
@@ -63,7 +74,7 @@ export default async function profil() {
 
                     activities.map((activitie) => {
                         return (<MineHoldCard name={activitie.className} weekday={activitie.classDay} time={activitie.classTime} hold_id={activitie.id}
-                            maxParticipants={activitie.maxParticipants} noParticipants={0} />)
+                            maxParticipants={activitie.maxParticipants} noParticipants={activitie.noParticipants} />)
                     })
                     :
                     user.classes.map((activitie) => {
