@@ -38,26 +38,26 @@ export default function LoginForm() {
                 </p>
             </div>
 
-            <h1 className="text-[20px] mb-4 font-bold text-black" >Log in with your credentials</h1>
-
-
-            <form action={formAction} noValidate>
-                <div>
+            <div className="m-4 ">
+                <h1 className="text-[20px] mb-4 font-bold text-black" >Log in with your credentials</h1>
+                <form action={formAction} noValidate>
                     <div>
-                        <input placeholder="Brugernavn" className="border rounded-full text-black bg-white p-[13] mb-[20px] w-full" type="text" name="email" defaultValue={state.values.email}></input>
-                        {state.errors?.email && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.email}</p>}
-                    </div>
+                        <div>
+                            <input placeholder="Brugernavn" className="border rounded-full text-black bg-white p-[13] mb-[20px] w-full" type="text" name="email" defaultValue={state.values.email}></input>
+                            {state.errors?.email && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.email}</p>}
+                        </div>
 
-                    <div>
-                        <input placeholder="Password" className="border rounded-full text-black bg-white  p-[13] mb-[20px] w-full" type="password" name="password" defaultValue={state.values.password}></input>
-                        {state.errors?.password && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.password}</p>}
+                        <div>
+                            <input placeholder="Password" className="border rounded-full text-black bg-white  p-[13] mb-[20px] w-full" type="password" name="password" defaultValue={state.values.password}></input>
+                            {state.errors?.password && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.password}</p>}
+                        </div>
                     </div>
-                </div>
-                {state.errors?.form && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.form}</p>}
-                <button type="submit" disabled={isPending} className="border rounded-full bg-[#F1C40E] w-full block mx-auto rounded-[10px] pt-[13px] pb-[13px] pr-[90px] pl-[90px] mb-[10px]  text-black ">{isPending ? "Logger ind..." : "Log ind"}</button>
-            </form>
-            <p className="text-center text-black mt-[20px] text-[14px] ">Are You not yet a Believer?</p>
-            <Link  className="text-center text-black mt-[20px] text-[14px] pb-[100px]" href="/opretbruger">Sign up here to start training like a pro.</Link>
+                    {state.errors?.form && <p className="bg-[#ff0000] text-white  mb-8">{state.errors.form}</p>}
+                    <button type="submit" disabled={isPending} className="border rounded-full bg-[#F1C40E] w-full block mx-auto rounded-[10px] pt-[13px] pb-[13px] pr-[90px] pl-[90px] mb-[10px]  text-black ">{isPending ? "Logger ind..." : "Log ind"}</button>
+                </form>
+                <p className="text-center text-black mt-[20px] text-[14px] ">Are You not yet a Believer?</p>
+                <Link className="block text-center text-black mt-[20px] text-[14px] pb-[100px]" href="/opretbruger">Sign up here to start training like a pro.</Link>
+            </div>
         </main>
     )
 }

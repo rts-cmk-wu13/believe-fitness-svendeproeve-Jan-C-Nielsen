@@ -104,7 +104,7 @@ export default async function aktiviteter({ params }) {
                     />
                     <p className="font-bold">{trainer.trainerName}</p>
                 </div>
-                {user !== null ?
+                {user !== null && aktivitet.users.length < aktivitet.maxParticipants ?
                     (<Link
                         className="flex w-full items-center justify-center px-4 py-2 mt-4 bg-[#F1C40E] text-black rounded-full"
                         href={`${UserRegistered ? "/frameld/" + aktivitet.id : "/tilmeld/" + aktivitet.id}`}

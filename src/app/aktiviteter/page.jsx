@@ -14,11 +14,9 @@ function renderStars(rating) {
     );
 }
 
-export default async function aktiviteter({ searchParams }) {
+export default async function aktiviteter() {
 
-    const searchstr = searchParams != null ? (await searchParams).searchstr : null;
-
-    const aktiviteter = await getAllClasses(searchstr);
+    const aktiviteter = await getAllClasses();
     console.log(aktiviteter)
 
     const randomAktivitet = aktiviteter[Math.floor(Math.random() * aktiviteter.length)];
@@ -26,9 +24,23 @@ export default async function aktiviteter({ searchParams }) {
 
     return (
         <main className="flex-1 pb-24 bg-white w-[411px] mx-auto flex flex-col items-center justify-center text-black">
+            <div className="flex items-center justify-between w-full">
 
-            <h1 className="ml-[27] mb-[30px] text-[24px] self-start w-full text-left">Popular classes</h1>
+                <h1 className="ml-[27px] text-[24px]">
+                    Popular classes
+                </h1>
 
+                <Link href="/navigation" className="pr-4">
+                    <Image
+                        src="/MenuGrey.png"
+                        alt="MenuGrey.png"
+                        width={21}
+                        height={15}
+                        priority
+                    />
+                </Link>
+
+            </div>
             {randomAktivitet && (
                 <div className="relative w-[370px] h-[404px] mb-[30px]">
                     <Image

@@ -124,8 +124,8 @@ export default async function SearchPage({ searchParams }) {
     console.log(aktiviteter)
 
     return (
-        <div>
-            <div className="mx-auto flex items-center justify-between w-[411px]">
+        <div className="bg-white mx-auto w-[411px]">
+            <div className=" flex items-center justify-between bg-white ">
                 <div  className="flex items-center">
                     <Link
                         href="/home"
@@ -140,11 +140,11 @@ export default async function SearchPage({ searchParams }) {
                         />
 
                     </Link>
-                    <h2 className=" text-[24px] text-black text-left p-[10px]">Search</h2>
+                    <h2 className=" text-[24px] text-black text-left p-[10px] ">Search</h2>
                 </div>
                 <Link
                     href="/navigation"
-                    className=" "
+                    className="p-[10px] "
                 >
                     <Image
                         src="/MenuGrey.png"
@@ -158,7 +158,7 @@ export default async function SearchPage({ searchParams }) {
             </div>
             <form
                 action={saveMessage}
-                className="mx-auto max-w-md  p-6 "
+                className="mx-auto max-w-md  p-6  bg-white"
             >
                 <div className="relative">
                     <input
