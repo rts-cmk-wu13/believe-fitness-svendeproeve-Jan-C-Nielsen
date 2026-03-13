@@ -321,7 +321,7 @@ export async function getAllClasses(searchStr = null) {
         const age = user ? user.age : 0;
         const role = user ? user.role : "default";
         console.log(role)
-        const response = await fetch("http://localhost:4000/api/v1/classes");
+        const response = await fetch("http://localhost:4000/api/v1/classes", { cache: "no-store" });
 
         //Response.ok is false for 404.
         if (response.status === 404) {

@@ -72,8 +72,8 @@ export default async function aktiviteter({ params }) {
                         </Link>
                     </div>
                 </div>
-                <div className="absolute bottom-0 left-0 w-full text-[#F1C40E] p-4 flex flex-col gap-2">
 
+                <div className="absolute bottom-0 left-0 w-full text-[#F1C40E] p-4 flex flex-col gap-2">
                     <h2 className="text-[24px] mb-6 font-bold">{aktivitet.className}</h2>
                     <div className="flex items-center justify-between">
                         <p>{renderStars(avgrating)}</p>
@@ -85,7 +85,7 @@ export default async function aktiviteter({ params }) {
                 </div>
             </div>
 
-            <div className="text-left ">
+            <div className="text-left m-4">
                 <p className="mb-4 ">
                     {aktivitet.classDay} {aktivitet.classTime}
                 </p>
