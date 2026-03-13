@@ -322,7 +322,7 @@ export async function getAllClasses(searchStr = null) {
         const role = user ? user.role : "default";
         console.log(role)
         const response = await fetch("http://localhost:4000/api/v1/classes", { cache: "no-store" });
-
+ console.log("response");
         //Response.ok is false for 404.
         if (response.status === 404) {
             return notFound();

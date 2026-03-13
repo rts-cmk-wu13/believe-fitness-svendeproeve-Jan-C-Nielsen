@@ -17,6 +17,7 @@ function renderStars(rating) {
 export default async function SearchPage({ searchParams }) {
 
     const searchstr = searchParams != null ? (await searchParams).searchstr : "";
+ console.log("SearchPage----------------------------")
 
     const aktiviteter = await getAllClasses(searchstr);
     console.log(aktiviteter)

@@ -23,7 +23,7 @@ export default async function aktiviteter({ params }) {
     const aktivitet = await getClass(id);
     console.log(aktivitet)
     const imageurl = aktivitet.asset.url;
-    const trainer = await GetTrainer(id)
+    const trainer = await GetTrainer(aktivitet.trainer.id)
     const avgrating = await GetAverageRating(aktivitet.id);
     const UserRegistered = await isUserRegistered(aktivitet)
     console.log("UserRegistered:" + UserRegistered)
